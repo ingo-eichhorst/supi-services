@@ -41,6 +41,13 @@ const Grid = contrib.grid
 const screen = blessed.screen()
 const data = require('./data')
 
+function addZero (i) {
+  if (i < 10) {
+    i = '0' + i
+  }
+  return i
+}
+
 var grid = new Grid({rows: 12, cols: 12, screen: screen})
 
 let r = () => Math.round(Math.random() * 100)

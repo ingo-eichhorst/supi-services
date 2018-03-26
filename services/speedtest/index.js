@@ -1,5 +1,5 @@
 const speedtest = require('speedtest-net')
-const data = require('./data')
+const { promisify } = require('util')
 
 const execteTest = (callback) => {
   let download, upload
@@ -8,19 +8,18 @@ const execteTest = (callback) => {
   }).on('downloadspeed', speed => {
     download = speed.toFixed(2)
   }).on('done', data => {
-    callback(download, upload)
+    callback({download, upload})
   })
 }
 
-const saveData = (download, upload) => {
-  data.speed.set(download, upload)
-}
-
 module.exports = {
-  init () {
-    execteTest(saveData)
-    setInterval(() => {
-      execteTest(saveData)
-    }, 1 * 60 * 1000)
+  async test () {
+    let result
+    try {
+      result = await promisify(execteTest)()
+    } catch (e) {
+      return e
+    }
+    return result
   }
 }

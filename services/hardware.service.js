@@ -4,8 +4,7 @@ const hw = require('./hardware')
 
 module.exports = {
   name: 'hardware',
-  settings: {
-  },
+  settings: {},
   actions: {
     status: {
       handler (ctx) {
@@ -31,17 +30,13 @@ module.exports = {
       }
     }
   },
-  events: {
-  },
+  events: {},
   monit: {},
-  methods: {
-  },
-  created () {
-  },
+  methods: {},
+  created () {},
   async started () {
     let initResult = await hw.init()
     console.log('Arduino init result:', initResult)
   },
-  stopped () {
-  }
+  stopped () {}
 }
