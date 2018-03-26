@@ -41,13 +41,6 @@ const Grid = contrib.grid
 const screen = blessed.screen()
 const data = require('./data')
 
-function addZero (i) {
-  if (i < 10) {
-    i = '0' + i
-  }
-  return i
-}
-
 var grid = new Grid({rows: 12, cols: 12, screen: screen})
 
 let r = () => Math.round(Math.random() * 100)
@@ -113,10 +106,11 @@ screen.key(['escape', 'q', 'C-c'], function (ch, key) {
   return process.exit(0)
 })
 
-updateScreen()
+// updateScreen()
 
 module.exports = {
-  update: updateScreen,
+  // update: updateScreen,
+  update: console.log,
   log (str) {
     log.log(str)
   }

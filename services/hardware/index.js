@@ -24,7 +24,7 @@ module.exports = {
     // arduino.setSerial(command)
     // return ctx.action.name
   },
-  async status (ctx) {
+  async status () {
     const storageStatus = await storage.check(config.mountPoint)
     const arduinoStatus = await arduino.check()
 

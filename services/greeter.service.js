@@ -9,6 +9,7 @@ module.exports = {
   actions: {
     hello (ctx) {
       this.broker.emit('log.info', ctx.nodeID)
+      this.broker.emit('event.request', 'got request')
       return ctx.nodeID
     },
     welcome: {

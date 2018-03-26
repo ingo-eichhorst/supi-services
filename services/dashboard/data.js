@@ -10,12 +10,10 @@ let store = {}
 
 store.logs = []
 data.log = {
-
   add (message) {
     store.logs.push(message)
     if (store.logs.length > 15) store.logs.shift()
   },
-
   get () {
     return store.logs
   }
@@ -92,10 +90,10 @@ data.speed = {
  */
 store.storage = {}
 data.storage = {
-  set (usage, max) {
+  set (usage, max, percentage) {
     store.storage.usage = usage
     store.storage.max = max
-    store.storage.percent = (usage / max * 100)
+    store.storage.percent = percentage || (usage / max * 100)
   },
   get () {
     return store.storage

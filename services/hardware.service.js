@@ -26,7 +26,7 @@ module.exports = {
       handler (ctx) {
         hw.shutdown()
         // set display to splash screen
-        this.broker.emit('shutdown', 'call', new Date())
+        this.broker.emit('event.shutdown', 'call', new Date())
       }
     }
   },
@@ -37,6 +37,13 @@ module.exports = {
   async started () {
     let initResult = await hw.init()
     console.log('Arduino init result:', initResult)
+    setInterval(async () => {
+      let stat = await hw.status()
+      this.broker.emit('log.storage', stat.storage)
+    }, 1 * 30 * 1000)
+    let stat = await hw.status()
+    this.broker.emit('log.storage', stat.storage)
+    
   },
   stopped () {}
 }

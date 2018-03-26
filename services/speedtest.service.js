@@ -22,7 +22,7 @@ module.exports = {
       } catch (e) {
         console.log(e)
       }
-      this.broker.emit('speedtest', this.testResult)
+      this.broker.emit('log.speedtest', this.testResult)
       console.log(this.testResult)
     }
   },
@@ -30,7 +30,7 @@ module.exports = {
   started () {
     setInterval(() => {
       this.test()
-    }, 1 * 60 * 1000)
+    }, 30 * 60 * 1000)
     this.test()
   },
   stopped () {}
