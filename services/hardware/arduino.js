@@ -1,24 +1,33 @@
 
-// var SerialPort = require('serialport').SerialPort
+var SerialPort = require('serialport').SerialPort
 // TODO: make sure the device is hooked up as 
 // docker mount or locally before connecting
-
-// ACTIVATE
-// var serialport = new SerialPort('/dev/tty.usbmodem1421')
-// serialport.on('open', function () {
-//   console.log('Serial Port Opend')
-//   serialport.on('data', function (data) {
-//     console.log(data[0])
-//   })
-// })
 
 let arduino = {}
 
 /**
  * TODO: Connect to Arduino and check that commands can be sent and received
  */
-arduino.init = () => {
-
+arduino.init = (serial) => {
+  return new Promise((resolve,reject) => {
+    if(serial) {
+      var serialport = new SerialPort('/dev/tty.usbmodem1421')
+      serialport.on('open', function () {
+        console.log('Serial Port Opend')
+        serialport.on('data', function (data) {
+          console.log(data[0])
+          arduino.initialized = true
+          return resolve(data[0])
+        })
+        serialport.on('error', function (err) {
+          console.log('cannot connect to arduino:', err)
+          return reject(err)
+        })
+      })
+    } else {
+      reject('no arduino available')
+    }
+  })
 }
 
 /**
@@ -35,11 +44,23 @@ arduino.init = () => {
 
 arduino.setSerial = (command) => {
   console.log(command)
+  return new Promise((reject,resolve)=>{
+    if(!arduino.initialized) return reject('no arduino available')
 
-  // ACTIVATE
-  // serialPort.write(command, () => {
-  //   serialport.drain(err => console.log(err || 'succesfully sent message'))
-  // })
+    serialPort.write(command, () => {
+      serialport.drain(err => console.log(err || 'succesfully sent message'))
+    })
+  })
+}
+
+arduino.check = () => {
+  return new Promise((reject,resolve)=>{
+    if(!arduino.initialized) return reject('no arduino initialized')
+
+    serialPort.write(command, () => {
+      serialport.drain(err => console.log(err || 'succesfully sent message'))
+    })
+  })
 }
 
 module.exports = arduino

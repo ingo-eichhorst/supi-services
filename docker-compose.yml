@@ -12,10 +12,10 @@ services:
       PORT: 3000
     ports:
       - "3000:3000"
-    links:
-      - nats
-    depends_on:
-      - nats
+    # links:
+    #   - nats
+    # depends_on:
+    #   - nats
 
   greeter:
     build:

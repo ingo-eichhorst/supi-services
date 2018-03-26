@@ -1,16 +1,18 @@
-const data = require('./data')
+// const data = require('./data')
 const { exec } = require('child_process')
+const fs = require('fs')
+const { promisify } = require('util')
 
-const readState = function (callback) {
+const readState = function (path, callback) {
   exec('df', (err, stdout, stderr) => {
     if (err) return callback(new Error('cannot find storage'))
-    // /media/storage
-    let storagePos = '/private/var/vm'
+    let storagePos = path
     if (!stdout.includes(storagePos)) return callback(new Error('cannot find storage'))
     const storeData = stdout.split('\n').find((str) => str.includes(storagePos)).split(/\s+/)
     return callback(null, {
       used: storeData[2],
-      max: storeData[3]
+      max: storeData[3],
+      percentage: 1-(storeData[3]/storeData[2])
     })
   })
 }
@@ -22,8 +24,6 @@ const update = function () {
   })
 }
 
-module.exports = storage 
-
 const storage = {
   init () {
     console.log('started')
@@ -32,5 +32,10 @@ const storage = {
       update()
     }, 10 * 60 * 1000)
     update()
+  },
+  check(path) {
+    return promisify(readState)(path)
   }
 }
+
+module.exports = storage 

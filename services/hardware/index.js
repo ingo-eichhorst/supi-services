@@ -1,24 +1,20 @@
-// const arduino = require('./arduino')
-// const display = require('./display')
-const data = require('./data')
-// const shutdown = require('./shutdown')
-// const storage = require('./storage')
-// const speedtest = require('./speedtest')
+const arduino = require('./arduino')
+const shutdown = require('./shutdown')
+const storage = require('./storage')
 const config = require('./config')
 
-function addZero (i) {
-  if (i < 10) {
-    i = '0' + i
-  }
-  return i
-}
-
 module.exports = {
-  init () {
+  async init () {
+    let initResult
+    try {
+      const arduinoStatus = await arduino.init(config.serialPath)
+    } catch (e) {
+      return e
+    }
     // return storage.check()
     //   .then(speedtest)
     // check connection to all hosts
-
+    return initResult
   },
   conrtol (ctx) {
     // console.log(ctx.param)
@@ -28,17 +24,22 @@ module.exports = {
     // arduino.setSerial(command)
     // return ctx.action.name
   },
-  get (ctx) {
-    // console.log(ctx.params)
-    // if (!data[ctx.params.system]) return 'unknown system'
-    // get nodes from 
-    return config.master
+  async status (ctx) {
+    const storageStatus = await storage.check(config.mountPoint)
+    const arduinoStatus = await arduino.check()
+
+    return {
+      storage: storageStatus,
+      arduino: arduinoStatus,
+      nodes: {
+        master: config.master,
+        worker: config.worker
+      }
+    }
   },
-  shutdown () {
-    // shutdown(config)
-    // data.events.add('shutdown', 'call', new Date())
-    // display.update()
-    // return 'going to shutdown system'
+  async shutdown (ctx) {
+    shutdown(config)
+    return 'going to shutdown system'
   }
 }
 
