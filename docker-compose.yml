@@ -2,35 +2,24 @@ version: "3.0"
 
 services:
 
-  api:
+  backend:
     build:
       context: .
     image: backend
     env_file: docker-compose.env
     environment:
-      SERVICES: api
       PORT: 3000
     ports:
       - "3000:3000"
-    # links:
-    #   - nats
-    # depends_on:
-    #   - nats
 
-  greeter:
-    build:
-      context: .
-    image: backend
-    env_file: docker-compose.env
-    environment:
-      SERVICES: greeter
+  nats:
+    image: nats
+    ports:
+      - "4222:4222"
 
-  metrics:
-    build:
-      context: .
-    image: backend
-    env_file: docker-compose.env
-    environment:
-      SERVICES: metrics
-
-  
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./db:/data/db

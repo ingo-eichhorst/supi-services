@@ -39,9 +39,10 @@ data.system = {
 store.monit = {}
 data.monit = {
   set (node, comp, value) {
-    store.monit[node] = store.monit[node] || {}
-    store.monit[node][comp] = store.monit[node][comp] || {}
-    store.monit[node][comp] = value
+    const shortNode = node.substr(0,3)
+    store.monit[shortNode] = store.monit[shortNode] || {}
+    store.monit[shortNode][comp] = store.monit[shortNode][comp] || {}
+    store.monit[shortNode][comp] = value
   },
   get () {
     return store.monit

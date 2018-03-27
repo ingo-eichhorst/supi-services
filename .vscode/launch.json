@@ -11,10 +11,27 @@
 			"program": "${workspaceRoot}/node_modules/moleculer/bin/moleculer-runner.js",
 			"cwd": "${workspaceRoot}",
 			"args": [
+				// "services"
+      ],
+      "env": {
+        "LOGLEVEL": "debug",
+        "SERVICEDIR": "services",
+        "SERVICES": "api,greeter,hardware,metrics,monit,speedtest"
+        // "LOGLEVEL": "error"
+      }
+    },
+    {
+			"type": "node",
+			"request": "launch",
+			"name": "Dashboard",
+			"program": "${workspaceRoot}/node_modules/moleculer/bin/moleculer-runner.js",
+			"cwd": "${workspaceRoot}",
+			"args": [
 				"services"
       ],
       "env": {
-        "LOGLEVEL": "debug"
+        "DISPLAY_TYPE": "HDMI",
+        "LOGLEVEL": "info"
       }
 		},
 		{

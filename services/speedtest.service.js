@@ -11,19 +11,25 @@ module.exports = {
         return this.testResult
       }
     },
+    test: {
+      handler (ctx) {
+        this.test()
+        return {message: 'starting speedtest ...'}
+      }
+    }
   },
   events: {},
   monit: {},
   methods: {
     async test () {
-      console.log('starting speedtest ...')
+      this.broker.emit('log.info', 'starting speedtest...')
       try {
         this.testResult = await speed.test()
       } catch (e) {
         console.log(e)
       }
       this.broker.emit('log.speedtest', this.testResult)
-      console.log(this.testResult)
+      return this.testResult
     }
   },
   created () {},

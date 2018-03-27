@@ -49,6 +49,7 @@ var log = grid.set(0, 0, 7, 7, contrib.log,
   { fg: 'green', selectedFg: 'green', label: 'HTTP Log' })
 
 function updateScreen () {
+  // console.log('UPDATING SCREEN ...')
   /* CPU */
   var bar = grid.set(0, 7, 7, 5, contrib.bar,
     { label: 'Server Utilization (%)', barWidth: 4, barSpacing: 4, xOffset: 2, maxHeight: 100 })
@@ -106,11 +107,11 @@ screen.key(['escape', 'q', 'C-c'], function (ch, key) {
   return process.exit(0)
 })
 
-// updateScreen()
+updateScreen()
 
 module.exports = {
-  // update: updateScreen,
-  update: console.log,
+  update: updateScreen,
+  // update: console.log,
   log (str) {
     log.log(str)
   }

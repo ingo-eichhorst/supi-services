@@ -1,9 +1,9 @@
 'use strict'
 
-let display = require('./display')
+let display = require('./dashboard')
 
 module.exports = {
-  name: 'display',
+  name: 'dashboard',
   settings: {},
   actions: {
     status () {

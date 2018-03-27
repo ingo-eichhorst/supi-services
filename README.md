@@ -29,3 +29,13 @@ npm run lint
 ```bash
 $ docker-compose up -d --build
 ```
+
+```bash
+SERVICES=greeter,api SERVICEDIR=services moleculer-runner
+```
+
+## Monitoring Dashboard
+
+Start a monitoring Dashboard in terminal
+
+$ LOGLEVEL=error SERVICEDIR=services SERVICES=dashboard DISPLAY_TYPE=HDMI npm start

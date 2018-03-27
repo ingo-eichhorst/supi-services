@@ -9,8 +9,6 @@ module.exports = {
   logFormatter: 'default',
 
   transporter: "TCP",
-  // transporter: 'NATS',
-  // transporter: 'nats://nats:4222',
 
   cacher: 'Memory',
 
