@@ -1,7 +1,7 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "My Moleculer microservices project",
+  "name": "supi-services",
+  "version": "0.0.2",
+  "description": "Backend services for Super Rapberry Pi Cluser",
   "scripts": {
     "docker-dev": "COMPOSE_FILE=docker-compose.dev.yml docker-compose up --build",
     "docker-dev-all": "COMPOSE_FILE=docker-compose.yml:docker-compose.dev.yml docker-compose up --build",
