@@ -2,18 +2,11 @@ const arduino = require('./arduino')
 const shutdown = require('./shutdown')
 const storage = require('./storage')
 const config = require('./config')
-let data = require('./data')
+const data = require('./data')
 
-let display
-if(process.env.DISPLAY_TYPE === 'HDMI') {
-  display = require('./display')
-} else display = {
-  log: console.log,
-  update () {
-    console.log('Display update')
-  }
-}
 function addZero (i) { return (i < 10) ? i = '0' + i : i }
+
+arduino.init(config.serialPath)
 
 module.exports = {
   // TODO: Start connections and check functionality
@@ -30,12 +23,14 @@ module.exports = {
     return initResult
   },
   conrtol (ctx) {
-    console.log(ctx.param)
+    //console.log('controlling arduino')
     // first letter of component + command
-    let modeString = ctx.param.mode ? ctx.param.mode[0] : ''
-    let command = ctx.param.comp[0] + modeString + ctx.param.value
+    let modeString = ''
+    if(ctx.params.mode) modeString = ctx.params.mode[0] || ''
+    let command = ctx.params.system[0] + modeString + ctx.params.value
+    //console.log('set arduino...')
     arduino.setSerial(command)
-    return ctx.action.name
+    return ctx.params
   },
   async status () {
     // const storageStatus = await storage.check(config.mountPoint)
@@ -49,6 +44,7 @@ module.exports = {
     //     worker: config.worker
     //   }
     // }
+    return this.loadData()
   },
   async shutdown (ctx) {
     shutdown(config)
@@ -72,20 +68,12 @@ module.exports = {
     data.log.add(log)
     if(eventName === 'log.speedtest') data.speed.set(payload.download, payload.upload)
     if(eventName === 'log.storage') data.storage.set(payload.used, payload.max, payload.percentage*100)
-
-    // console.log("LOG", log)
-    // display.log(log)
-    // display.update()
   },
   event (payload, sender, eventName) {
     data.events.add(eventName, sender, payload)
-    // console.log("EVENT", payload, sender, eventName)
-    // display.update()
   },
   monit (payload, sender, eventName) {
     data.monit.set(sender, eventName.split('.')[1], payload)
-    // console.log("MONIT", payload, sender, eventName)
-    // display.update()
   }
 }
 

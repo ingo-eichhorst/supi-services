@@ -21,6 +21,17 @@ module.exports = {
     // Serve assets from "public" folder
     assets: {
       folder: 'public'
-    }
+    },
+
+    		// Global CORS settings
+		cors: {
+			origin: "*",
+			methods: ["GET", "OPTIONS", "POST", "PUT", "DELETE"],
+			allowedHeaders: "*",
+			exposedHeaders: "*",
+			credentials: true,
+			maxAge: null
+		}
+
   }
 }

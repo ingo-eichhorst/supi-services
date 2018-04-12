@@ -94,7 +94,7 @@ data.storage = {
   set (usage, max, percentage) {
     store.storage.usage = usage
     store.storage.max = max
-    store.storage.percent = percentage || (usage / max * 100)
+    store.storage.percent = percentage ||  (usage / max * 100)
   },
   get () {
     return store.storage

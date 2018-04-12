@@ -17,10 +17,11 @@ const readState = function (path, callback) {
   })
 }
 
-const update = function () {
-  readState((err, result) => {
+const update = async function (path) {
+  readState(path, async (err, result) => {
     if (err) console.error(err)
-    data.storage.set(result.used, result.max)
+    let status = await data.storage.set(result.used, result.max)
+    return status
   })
 }
 
@@ -33,8 +34,8 @@ const storage = {
     }, 10 * 60 * 1000)
     update()
   },
-  check(path) {
-    return promisify(readState)(path)
+  async check(path) {
+    return await update(path)
   }
 }
 
