@@ -2,7 +2,6 @@ let _ = require('lodash')
 
 module.exports = {
   name: 'metrics',
-
   events: {
     'metrics.trace.span.start' (payload) {
       this.requests[payload.id] = payload

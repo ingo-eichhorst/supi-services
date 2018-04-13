@@ -360,14 +360,23 @@ class Settings extends React.Component {
   }
 }
 
+let contentStyle = {
+  paddingBottom:'80px',
+  marginTop: '16px'
+}
+
 class Content extends React.Component {
 
   render() {
     let token = sessionStorage.getItem('token')
     console.log('TOKEN:', token)
-    if(!token) return <Login />
+    if(!token) return (
+      <section className="container" style={contentStyle}>
+        <Login />
+      </section>
+    )
     else return (
-      <section className="container" style={{marginTop: "16px"}}>
+      <section className="container" style={contentStyle}>
         <Route exact={true} path="/" render={()=>(<Dashboard />)} />      
         <Route path="/dashboard" render={()=>(<Dashboard />)} />
         <Route path="/control" render={()=>(<Control />)} />
@@ -404,7 +413,7 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <Router>
-          <div>
+          <div style={{minHeight:'100%',position:'relative'}}>
             <Header />
             <List />
             <Content />

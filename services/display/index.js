@@ -13,7 +13,7 @@ function updateScreen (data) {
   /* CPU */
   var bar = grid.set(0, 7, 7, 5, contrib.bar,
     { label: 'Server Utilization (%)', barWidth: 4, barSpacing: 4, xOffset: 2, maxHeight: 100 })
-  let monit = data.monit.get()
+  let monit = data.monit
   let titles = []
   let values = []
   for (let node in monit) {
@@ -25,7 +25,7 @@ function updateScreen (data) {
     data: values
   })
   /* STORAGE */
-  let storage = data.storage.get()
+  let storage = data.storage
   let sp = storage.percent || 0
   var gauge = grid.set(7, 7, 2, 5, contrib.gauge, {label: 'Storage', percent: [0, 100]})
   gauge.setData(sp, 100 - sp)
@@ -35,7 +35,7 @@ function updateScreen (data) {
   var gaugeTwo = grid.set(9, 7, 3, 5, contrib.gauge, {label: 'Network Speed', percent: 100})
   gaugeTwo.setData(gVal / 2)
 
-  let { download, upload } = data.speed.get()
+  let { download, upload } = data.speed
   var bar2 = grid.set(9, 7, 3, 5, contrib.bar,
     { label: 'Network Speed', barWidth: 10, barSpacing: 4, xOffset: 2, maxHeight: 10 })
   bar2.setData({
@@ -45,7 +45,7 @@ function updateScreen (data) {
 
   /* EVENTS */
   var markdown = grid.set(7, 0, 5, 7, contrib.markdown, {label: 'Latest Event'})
-  let events = JSON.parse(JSON.stringify(data.events.get()))
+  let events = JSON.parse(JSON.stringify(data.events))
   let reversedEvents = events.reverse()
   let eventsString = ''
 
@@ -57,7 +57,7 @@ function updateScreen (data) {
   /* LOG */
   let log = grid.set(0, 0, 7, 7, contrib.markdown, { fg: 'green', selectedFg: 'green', label: 'Log' })
   let logString = ''
-  let logs = JSON.parse(JSON.stringify(data.log.get()))
+  let logs = JSON.parse(JSON.stringify(data.log))
   let reversedLogs = logs.reverse()
   reversedLogs.forEach(l=>{
     logString += `${l}\n`

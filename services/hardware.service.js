@@ -15,7 +15,6 @@ module.exports = {
       params: {
         system: 'string',
         mode: 'string',
-        // key: 'string',
         value: 'string'
       },
       handler (ctx) {
@@ -25,7 +24,6 @@ module.exports = {
     shutdown: {
       handler (ctx) {
         hw.shutdown()
-        // set display to splash screen
         this.broker.emit('event.shutdown', 'call', new Date())
       }
     }
@@ -34,21 +32,14 @@ module.exports = {
     /* LOGS */
     'log.*' (payload, sender, eventName) {
       hw.log(payload, sender, eventName)
-      // console.log(payload, sender, eventName)
     },
     /* EVENTS */
     'event.*' (payload, sender, eventName) {
       hw.event(payload, sender, eventName)
-
-      // data.events.add(eventName, sender, payload)
-      // display.update()
     },
     /* MONIT */
     'monit.cpu' (payload, sender, eventName) {
       hw.monit(payload, sender, eventName)
-
-      // data.monit.set(sender, 'cpu', payload)
-      // display.update()
     }
   },
   monit: {},

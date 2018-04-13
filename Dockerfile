@@ -1,4 +1,5 @@
-FROM node:latest
+#FROM node:latest
+FROM hypriot/rpi-node
 
 ENV NODE_ENV=production
 

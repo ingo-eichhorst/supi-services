@@ -17,7 +17,7 @@ module.exports = {
   monit: {},
   methods: {
     async update(){
-      const data = await broker.call("hardware.status")
+      const data = await this.broker.call("hardware.status")
       display.updateScreen(data)
     }
   },
