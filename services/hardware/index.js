@@ -26,7 +26,7 @@ module.exports = {
     //console.log('controlling arduino')
     // first letter of component + command
     let modeString = ''
-    if(ctx.params.mode) modeString = ctx.params.mode[0] || ''
+    if(ctx.params.mode && ctx.params.mode !== 'manual') modeString = ctx.params.mode[0] || ''
     let command = ctx.params.system[0] + modeString + ctx.params.value
     //console.log('set arduino...')
     arduino.setSerial(command)
