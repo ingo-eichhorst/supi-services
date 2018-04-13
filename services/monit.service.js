@@ -16,6 +16,9 @@ module.exports = {
     async monitSystem () {
       const result = await monit.checkSystem()
       this.broker.emit('monit.cpu', result.cpu_percent)
+      this.broker.emit('monit.mem', result.mem_percent)
+      this.broker.emit('monit.temp', result.cpu_temp)
+      this.broker.emit('monit.disk', result.disk_percent)
       console.log('MONIT:', result)
     }
   },

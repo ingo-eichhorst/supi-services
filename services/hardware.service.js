@@ -38,7 +38,7 @@ module.exports = {
       hw.event(payload, sender, eventName)
     },
     /* MONIT */
-    'monit.cpu' (payload, sender, eventName) {
+    'monit.*' (payload, sender, eventName) {
       hw.monit(payload, sender, eventName)
     }
   },

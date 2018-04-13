@@ -3,8 +3,7 @@ version: "3.0"
 services:
 
   backend:
-    build: 1n90/supi-services:0.0.8
-      # context: .
+    context: .
     image: backend
     env_file: docker-compose.env
     environment:
