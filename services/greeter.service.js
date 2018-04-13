@@ -2,10 +2,8 @@
 
 module.exports = {
   name: 'greeter',
-  settings: {
-  },
-  metadata: {
-  },
+  settings: {},
+  metadata: {},
   actions: {
     hello (ctx) {
       this.broker.emit('log.info', ctx.nodeID)
