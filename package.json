@@ -9,7 +9,9 @@
     "start": "moleculer-runner",
     "ci": "jest --watch",
     "test": "jest --coverage",
-    "lint": "eslint services"
+    "lint": "eslint services",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [
     "microservices",
@@ -33,7 +35,8 @@
     "serialport": "^6.1.1",
     "speedtest-net": "^1.4.2",
     "ssh2": "^0.6.0",
-    "systeminformation": "^3.37.8"
+    "systeminformation": "^3.37.8",
+    "snyk": "^1.93.0"
   },
   "engines": {
     "node": ">= 6.x.x"
@@ -45,5 +48,6 @@
     "roots": [
       "../test"
     ]
-  }
+  },
+  "snyk": true
 }
