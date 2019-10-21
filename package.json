@@ -33,7 +33,7 @@
     "moleculer-web": "^0.6.0",
     "nats": "^0.8.4",
     "serialport": "^6.1.1",
-    "speedtest-net": "^1.4.2",
+    "speedtest-net": "^1.5.2",
     "ssh2": "^0.6.0",
     "systeminformation": "^3.37.8",
     "snyk": "^1.93.0"
