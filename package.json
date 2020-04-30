@@ -36,7 +36,7 @@
     "speedtest-net": "^1.4.2",
     "ssh2": "^0.6.0",
     "systeminformation": "^3.37.8",
-    "snyk": "^1.93.0"
+    "snyk": "^1.316.1"
   },
   "engines": {
     "node": ">= 6.x.x"
