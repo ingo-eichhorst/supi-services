@@ -35,7 +35,7 @@
     "serialport": "^6.1.1",
     "speedtest-net": "^1.4.2",
     "ssh2": "^0.6.0",
-    "systeminformation": "^3.37.8",
+    "systeminformation": "^4.34.11",
     "snyk": "^1.93.0"
   },
   "engines": {
